@@ -1,0 +1,31 @@
+/* Fondo general */
+body {
+    background-color: #FFFFFF;
+}
+
+/* Encabezados */
+h1, h2, h3 {
+    color: #2c3e50;
+}
+
+/* Métricas personalizadas */
+[data-testid="metric-container"] {
+    background-color: #305496;
+    border-radius: 12px;
+    padding: 15px;
+    margin: 3px;
+    border: 1px solid #305496;
+}
+
+/* Filtros en la barra lateral */
+.stSelectbox > div > div {
+    border-radius: 8px;
+    padding: 3px;
+    background-color: #FFFFFF;
+}
+
+/* Sidebar */
+.sidebar .sidebar-content {
+    background-color: #305496;
+}
+
