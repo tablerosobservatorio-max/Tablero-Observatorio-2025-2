@@ -15,6 +15,7 @@ import seaborn as sns
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import modulo_osm as osm
+from streamlit_extras.add_vertical_space import add_vertical_space
 
 #-------------------------------------------------------------------------------
 # CONFIGURACIÓN DE PÁGINA
@@ -25,7 +26,7 @@ st.markdown("<h2 style='text-align: left;color: #39A8E0;'>Simulación de escenar
 # Simulación de Escenarios
 # ------------------------------------------------------------------------------
 #df = pd.read_excel('data/Tabla_ModeloCiudad.xlsx')
-df = pd.read_excel('data/Tabla_MPersonas.xlsx')
+df = pd.read_excel('data/Tabla_MPersonas.xlsx',sheet_name='Sheet1')
 
 st.write("")
 
@@ -67,96 +68,38 @@ for col, val in filtros.items():
   if val is not None:
     df_filtrado = df_filtrado[df_filtrado[col] == val]
 
-
 categorias_toggles = {
-  "Consumo de sustancias psicoactivas":["Alcohol", "Alucinogenos", "Cannnabinoides", 
-                                         "Cocaina", "Disolventes Volatiles", 
-                                         "Multiples drogas y alucinogenos", 
-                                         "Opiaceos", "Sedantes o hipnóticos", "Tabaco",
-                                         "Otros estimulantes incluida la cafeina"],
-  "Trastornos esquizotipicos y delirantes":["Esquizofrenia", "Psicosis no orgánica no especificada", 
-                   "Trastorno esquizotípico","Trastornos delirantes persistentes", 
-                   "Trastornos esquizoafectivos", 
-                   "Trastornos psicóticos agudos y transitorios", 
-                   "Otros trastornos psicóticos no orgánicos"],
-  "Retraso mental":["Leve", "Moderado", "Muy fuerte","Profundo", "No especificado"],
- "Síndromes de comportamiento por alteraciones fisiológicas y fact. físicos": ["Abuso de sustancias no dependientes", 
-                                             "Disfunción sexual, no causada por un trastorno orgánico o una enfermedad", 
-                                             "Factores psicológicos y conductuales asociados a trastornos o enfermedades clasificados en otra parte", 
-                                             "Síndromes conductuales no especificados asociados a alteraciones fisiológicas y factores físicos", 
-                                             "Trastornos de la alimentación", 
-                                             "Trastornos del sueño no orgánicos", 
-                                             "Trastornos mentales y del comportamiento asociados al puerperio, no clasificados en otra parte"],
- "Trastornos del estado del animo":  ["Episodio depresivo", "Episodio maníaco", 
-                               "Persistentes","Trastorno afectivo bipolar", 
-                               "Trastorno depresivo recurrente","Otros trastornos"], 
+    "Consumo de Sustancias Psicoactivas":1,
+    "Trastornos esquizotipicos y delirantes":2,
+    "Retraso Mental":3,
+    "Síndromes de comportamiento por alteraciones fisiológicas y fact. físicos":4,
+    "Trastornos del estado del animo":5,
+    "Trastornos del desarrollo psicológico":6,
+    "Trastornos neuróticos, estrés y somatomorfos":7,
+    "Trastornos hab. niñez y adolescencia":8,
+    "Trastornos mentales orgánicos y sintomáticos":9,
+    "Trastornos de personalidad y comportamiento en adultos":10
+}
 
-"Trastornos del desarrollo psicológico.":["Trastorno específico del desarrollo de la función motora", 
-                            "Trastorno no especificado del desarrollo psicológico", 
-                            "Trastornos específicos del desarrollo de las habilidades escolares", 
-                            "Trastornos específicos del desarrollo del habla y el lenguaje", 
-                            "Trastornos generalizados del desarrollo", 
-                            "Trastornos mixtos específicos del desarrollo",
-                            "Otros trastornos del desarrollo psicológico"], 
-                            
-"Trastornos neuróticos, estrés y somatomorfos":["Reacción al estrés severo y trastornos de adaptación", 
-                                    "Trastorno obsesivo-compulsivo", 
-                                    "Trastornos de ansiedad fóbica", 
-                                    "Trastornos disociativos", 
-                                    "Trastornos somatomorfos",
-                                    "Otros trastornos de ansiedad", 
-                                    "Otros trastornos neuróticos"], 
-"Trastornos hab. niñez y adolescencia":["Trastornos de conducta", "Trastornos de tics", 
-                              "Trastornos del funcionamiento social con inicio específico en la infancia y la adolescencia", 
-                              "Trastornos emocionales de inicio específico en la infancia", 
-                              "Trastornos hipercinéticos", 
-                              "Trastornos mixtos de la conducta y las emociones",
-                              "Otros trastornos conductuales y emocionales"],
-"Trastornos mentales orgánicos y sintomáticos":["Delirio no inducido por el alcohol y otras sustancias psicoactivas", 
-                              "Demencia en la enfermedad de Alzheimer", 
-                              "Demencia en otras enfermedades clasificadas en otra parte", 
-                              "Demencia no especificada", 
-                              "Demencia vascular", 
-                              "Síndrome amnésico orgánico, no inducido por el alcohol y otros sustancias psicoactivas", 
-                              "Trastorno mental orgánico o sintomático no especificado", 
-                              "Trastornos de la personalidad y del comportamiento debidos a enfermedades cerebrales, daños y disfunción",
-                              "Otro trastornos mentales debidos a daño y disfunción cerebral y a enfermedad física"], 
+toggles_valores = []  # para guardar categorías seleccionadas
 
-"Trastornos de personalidad y comportamiento en adultos":["Cambios de personalidad duraderos, no atribuibles a daño cerebral y enfermedad", 
-                            "Trastorno no especificado de la personalidad y el comportamiento en la edad adulta", 
-                            "Trastornos de hábitos e impulsos", 
-                            "Trastornos de identidad de género", 
-                            "Trastornos de la preferencia sexual", 
-                            "Trastornos específicos de la personalidad", 
-                            "Trastornos mixtos y otros trastornos de la personalidad", 
-                            "Trastornos psicológicos y conductuales asociados con el desarrollo y la orientación sexual", 
-                            "Otros trastornos de la personalidad y el comportamiento en la edad adulta"]
-  }
-
-toggles_valores = {}  # para guardar estados
-
-col1, col2 = st.columns([5,5])
-
-with col1:
-  
-  # Almacenar toggles activos
-  enfermedades_seleccionadas = []
-  
-  for categoria, toggles in categorias_toggles.items():
-      with st.expander(categoria):
-          for i, tog in enumerate(toggles):
-              estado = st.toggle(tog, key=f"{categoria}_{tog}_{i}")
-              if estado:
-                  enfermedades_seleccionadas.append(tog)
-  
-  # Ahora filtrar el DataFrame según los toggles activos
-  if enfermedades_seleccionadas:
-      df_filtrado = df_filtrado[df_filtrado['Enfermedad_Evento'].isin(enfermedades_seleccionadas)]
-  else:
-      # Si ningún toggle activo, mostrar todos (sin filtro)
-      df_filtrado = df_filtrado.copy()
-  
+add_vertical_space(3)
+col1, col2 ,col3= st.columns([1,5,4])
 with col2:
+    for categoria, codigo in categorias_toggles.items():
+        # Mostrar un checkbox usando el nombre de la categoría como label
+        estado = st.toggle(label=categoria, key=f"Grupo_{codigo}")
+        if estado:
+            toggles_valores.append(codigo)  # agregamos el identificador
+
+    # Filtramos el DataFrame según los valores de grupo seleccionados
+    if toggles_valores:
+        df_filtrado = df_filtrado[df_filtrado['cod_grupo'].isin(toggles_valores)]
+    else:
+        # Si ningún checkbox activo, mostramos todo (sin filtro)
+        df_filtrado = df_filtrado.copy()
+        
+with col3:
   Prom_Score=round(100*df_filtrado['Prob_RandomForest'].mean(),1)
   
   st.write("")
