@@ -29,14 +29,14 @@ if selected == "Inicio":
     st.markdown("<h1 style='text-align: center; color: #4B8BBE;'>📊 Observatorio de Salud Mental de la Orinoquia Colombiana</h1>", unsafe_allow_html=True)
 
     st.markdown("""
-        <h3 style='text-align: center; color: #333333;'>Análisis exploratorio, y modelamiento de enfermedades de Salud Mental (2018 - 2023)</h3>
+        <h3 style='text-align: center; color: #333333;'>Análisis exploratorio, y modelamiento de enfermedades de Salud Mental (2018 - 2022)</h3>
         <hr style="height:2px;border-width:0;color:gray;background-color:gray">
     """, unsafe_allow_html=True)
 
     st.markdown("""
         <div style="text-align: justify; font-size: 18px; color: #444444;">
         Este tablero interactivo tiene como objetivo mostrar la distribución de enfermedades más relevantes reportadas
-        por los subsectores del país durante los años 2018 - 2023. Con visualizaciones dinámicas, métricas clave
+        por los subsectores del país durante los años 2018 - 2022. Con visualizaciones dinámicas, métricas clave
         y comparaciones por departamento, buscando facilitar la toma de decisiones informadas en salud pública.
         </div>
     """, unsafe_allow_html=True)
