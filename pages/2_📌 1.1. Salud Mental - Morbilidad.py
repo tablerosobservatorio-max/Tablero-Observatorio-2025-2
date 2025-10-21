@@ -267,10 +267,10 @@ investment_median= float(pd.Series(df_selection['Enfermedad_Evento']).nunique())
 total1,total2,total3,total4,total5=st.columns(5,gap='small')
 with total1: 
     st.info('Años', icon="📆") 
-    st.metric(label="Periodo", value="2018 - 2023")
+    st.metric(label="Periodo", value="2015 - 2022")
 with total2:
     st.info('Tot. Eventos',icon="🎯")
-    st.metric(label="Tot. Casos", value=f"{total_investment:,.0f}".replace(",", "."))
+    st.metric(label="Tot. Casos", value="310.879")
 with total3:
     st.info('Tot. Dptos.',icon="🎯")
     st.metric(label="Tot. Dptos.",value=f"{investment_mode1:,.0f}")
@@ -1164,7 +1164,7 @@ try:
     # Agregando el Titulo (Elegante)
     fig.update_layout(
         title={
-            "text": "Enfermedades más Frecuentes por Departamento - 2023",
+            "text": "Enfermedades más Frecuentes por Departamento - 2022",
             "y": 0.95, 
             "x": 0.5, 
             "xanchor": "center", 
@@ -1497,7 +1497,7 @@ gdf_merged = gdf.merge(df, on="mpio_cdpmp", how="left")
 # -------------------------
 # INTERFAZ STREAMLIT
 # -------------------------
-st.title("🗺️ Morbilidad en la Orinoquía - 2023")
+st.title("🗺️ Morbilidad en la Orinoquía - 2022")
 
 # Layout: mapa a la izquierda y tabla a la derecha
 col1, col2 = st.columns([2, 1])
@@ -1533,7 +1533,7 @@ with col1:
 # TABLA ORDENADA
 # -------------------------
 with col2:
-    st.subheader("📋 Ranking de Morbilidad para 2023")
+    st.subheader("📋 Ranking de Morbilidad para 2022")
 
     tabla = gdf_merged[["Departamento", "Municipio", "Tasa_Morbi"]].copy()
     tabla = tabla.sort_values(by="Tasa_Morbi", ascending=False)
