@@ -114,13 +114,13 @@ st.write("")
 a,b,c,d,e,f =st.columns([3,1.6,1.6,1.6,1.6,3])
 
 with b:
-  st.metric('Arauca',Tasas[0],border=True)
+  st.metric('Arauca',Tasas.iloc[0],border=True)
 with c:
-  st.metric('Casanare',Tasas[1],border=True)
+  st.metric('Casanare',Tasas.iloc[1],border=True)
 with d:
-  st.metric('Meta',Tasas[2],border=True)
+  st.metric('Meta',Tasas-iloc[2],border=True)
 with e:  
-  st.metric('Vichada',Tasas[3],border=True)
+  st.metric('Vichada',Tasas-iloc[3],border=True)
 
 st.write("")
 #-------------------------------------------------------------------------------
@@ -202,10 +202,10 @@ with col1:
 with col2:
   st.markdown("<h4 style='text-align: left;color: #39A8E0;'>Tasas de morbilidad por municipio y sexo</h4>", unsafe_allow_html=True)
   
-  st.plotly_chart(G_bar2, use_container_width=True)
+  st.plotly_chart(G_bar2, width='stretch')
 
 #----------------------------------------------------------------------------------------------------------------
-add_vertical_space(3)
+st.space(3)
 
 st.markdown("<h4 style='text-align: left;color: #39A8E0;'>Detalle del evento</h4>", unsafe_allow_html=True)
 #----------------------------------------------------------------------------------------------------------------
@@ -247,7 +247,7 @@ a,b=st.columns([4,6])
 
 with a:
   Graf_dc=osm.diag_sectores_dinamico(df_dc_f,"")
-  st.plotly_chart(Graf_dc, use_container_width=True) 
+  st.plotly_chart(Graf_dc, width='stretch') 
 with b:
   st.write("")
   # Mostrar la tabla interactiva
@@ -255,7 +255,7 @@ with b:
     Tasas_finales,
     gridOptions=gridOptions,
     enable_enterprise_modules=False,
-    update_mode='MODEL_CHANGED',
+    update_on=['cellValueChanged'],
     height=500,
     fit_columns_on_grid_load=True
   )
