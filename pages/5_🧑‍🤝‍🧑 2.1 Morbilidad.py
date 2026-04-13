@@ -118,9 +118,9 @@ with b:
 with c:
   st.metric('Casanare',Tasas.iloc[1],border=True)
 with d:
-  st.metric('Meta',Tasas-iloc[2],border=True)
+  st.metric('Meta',Tasas.iloc[2],border=True)
 with e:  
-  st.metric('Vichada',Tasas-iloc[3],border=True)
+  st.metric('Vichada',Tasas.iloc[3],border=True)
 
 st.write("")
 #-------------------------------------------------------------------------------
