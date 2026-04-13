@@ -249,15 +249,15 @@ with a:
   Graf_dc=osm.diag_sectores_dinamico(df_dc_f,"")
   st.plotly_chart(Graf_dc, width='stretch') 
 with b:
-  st.write("")
-  # Mostrar la tabla interactiva
-  AgGrid(
-    Tasas_finales,
-    gridOptions=gridOptions,
-    enable_enterprise_modules=False,
-    update_on=['cellValueChanged'],
-    height=500,
-    fit_columns_on_grid_load=True
-  )
-
-
+    st.space(1)
+    if Tasas_finales is not None and not Tasas_finales.empty:
+        Tasas_finales = Tasas_finales.reset_index(drop=True)
+        altura = min(35 * len(Tasas_finales) + 50, 500)
+        st.data_editor(
+            Tasas_finales,
+            width='stretch',
+            height=altura,
+            disabled=True
+        )
+    else:
+        st.warning("No hay datos para mostrar")
