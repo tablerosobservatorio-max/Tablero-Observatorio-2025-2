@@ -84,9 +84,14 @@ with col1:
   num_filas = len(tabla_tasas)
   alto_fila = 35  # altura aproximada de una fila en píxeles
   alto_total = alto_fila * (num_filas + 1)
-  AgGrid(tabla_tasas, gridOptions=grid_options, 
-         height=alto_total, 
-         fit_columns_on_grid_load=True)
+  st.dataframe(
+    tabla_tasas,
+    width='stretch',
+    height=alto_total
+  )
+  #AgGrid(tabla_tasas, gridOptions=grid_options, 
+  #       height=alto_total, 
+  #       fit_columns_on_grid_load=True)
   
 with col2:
   # Se crea el diagrama de dispersion MOrbilidad vs. Mortalidad
@@ -122,9 +127,14 @@ with col1:
   num_filas = len(tabla_tasas_dlt)
   alto_fila = 35  # altura aproximada de una fila en píxeles
   alto_total = alto_fila * (num_filas + 1)
-  AgGrid(tabla_tasas_dlt, gridOptions=grid_options, 
-         height=alto_total, 
-         fit_columns_on_grid_load=True)
+  st.dataframe(
+    tabla_tasas_dlt,
+    width='stretch',
+    height=alto_total
+  )
+  #AgGrid(tabla_tasas_dlt, gridOptions=grid_options, 
+  #       height=alto_total, 
+  #       fit_columns_on_grid_load=True)
 
 with col2:
   tabla_tasas_dlt2 = pd.melt(tabla_tasas_dlt, 
